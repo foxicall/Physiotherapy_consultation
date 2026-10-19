@@ -1,5 +1,7 @@
+import json
 import os
 from html import escape
+from pathlib import Path
 
 import httpx
 import streamlit as st
@@ -8,7 +10,8 @@ from google.genai import errors, types
 
 MODEL = "gemini-3.8-flash"
 CUSTOM_BODY_PART = "自訂其他部位"
-CLINIC_NAME = "生生優動板橋診所"
+CLINIC_INFO = json.loads(Path(__file__).with_name("clinic_info.json").read_text(encoding="utf-8"))
+CLINIC_NAME = CLINIC_INFO["name"]
 SINGLE_SERVICES = {
     "first_visit": {
         "name": "首次評估與治療",
@@ -36,14 +39,14 @@ PACKAGES = {
     "manual": {"name": "專案徒手療程組", "single_service": "manual", "sessions": 10, "total": 20900},
     "instruments": {"name": "整合儀器療程組", "single_service": "instruments", "sessions": 10, "total": 30400},
 }
-CLINIC_PRICING_INSTRUCTION = """本次已提供生生優動板橋診所的可信價目表。本診所為自費治療，實際內容依個人狀況客製化安排；可以引用已知服務、時間及價格，不再把這些已知資料寫成待確認。
+CLINIC_PRICING_INSTRUCTION = """本次已提供生生優動板橋診所的可信價目表。本頁所列為自費治療方案，實際內容依個人狀況客製化安排；可以引用已知服務、時間及價格，不再把這些已知資料寫成待確認。
 初診／首次體驗資格相符時，可用40分鐘NT$999的首次評估與治療作為低門檻選項；不能把動作評估稱為已確立醫療診斷，也不能當作任何警訊的替代就醫處理。
 首次體驗40分鐘與其他60分鐘服務不同，不能直接宣稱相同服務省下單次價差。不可自行假定首次999可折抵包套或計入包套一堂。
 10堂是商業方案的商品規格，不是每個人都需要的固定神經適應或完整功能重建週期；是否適合、需要幾次及何時結束，都依評估、功能反應、意願與預算決定，可保留單次及自主管理選項。
 討論包套時必須同時說明10堂總價與折算均價；節省金額只和相同項目、相同60分鐘規格的10次單次原價比較，不把包套均價說成可單堂購買的價格或保證最划算。
-本診所未提供健保治療。患者提到健保拉腰電療時，尊重其他可提供健保的院所選項，再透明說明本院自費安排；不得邀請患者在本院做健保，也不宣稱自費必然較有效。
+本頁價目為自費治療方案，不代表診所所有醫療服務的健保適用情形。患者提到健保拉腰電療時，尊重可提供健保的醫療選項，再透明說明本頁自費安排；其他門診或服務能否使用健保需向診所確認，不自行宣稱本院有或完全沒有健保，也不宣稱自費必然較有效。
 震波、INDIBA英特波僅作已知可選技術，實際使用須評估適應症、禁忌症與部位；不保證每堂同時使用所有儀器，不宣稱快速消炎、細胞再生、軟骨或韌帶修復、根治或10堂一定恢復。
-包套效期、退費、轉讓、分期、付款與預約方式、額外折扣及首次費用能否折抵未提供，需明確待確認；不得編造限時、名額不足或優惠期限促成消費。"""
+已知地址、電話與官方連結可照診所資訊引用；一般服務時段不等同每位醫師門診時間，不自行推定逐日開診或可預約名額。包套效期、退費、轉讓、分期、付款、詳細預約流程、額外折扣及首次費用能否折抵未提供，需明確待確認；不得編造限時、名額不足或優惠期限促成消費。"""
 PATIENT_TYPES = [
     "每天盯螢幕10小時的工程師",
     "市場扛重物的阿伯/阿姐",
@@ -73,8 +76,8 @@ CLINICAL_GROUNDING_INSTRUCTION = """你撰寫的是供治療師練習的示範�
 不得使用「剛剛檢查發現」、「目前已知關節壓力偏高」、「今天教您的」等措辭假稱已完成評估或衛教；改為「若評估發現」、「可在評估後討論」。
 未提供實際治療安排時，重新評估時點只能依症狀與功能反應描述，不自行填寫幾次、幾週或免費服務；已知包套堂數只是商品規格，不代表醫療處方。
 健保及自費都可能包含主動運動、徒手或其他治療，不依付費方式推定治療內容或優劣，需以院所實際可提供的選項比較。
-已知院所服務與價格以可信價目表為準，可直接引用；未提供的預約時段、聯絡方式、支付與退費等條件仍用待確認佔位，不能將已知價格任意改寫或加價。
-本診所為全自費，健保選項只能指其他可提供健保的院所；不依付費方式推定治療內容或優劣，不暗示自費較有針對性、健保較被動或需較多回診。
+已知院所聯絡資訊以官方據點資料為準，服務與價格以可信價目表為準，可直接引用；未提供的實際預約名額、支付與退費等條件仍用待確認佔位，不能將已知價格任意改寫或加價。
+本頁所列為自費治療方案，不自行外推診所其他服務的健保適用；不依付費方式推定治療內容或優劣，不暗示自費較有針對性、健保較被動或需較多回診。
 輸出前逐段檢查所有院所服務、費用與預約說法，將無輸入依據的斷言改成條件句或待確認佔位。
 解剖學機轉、惡化風險及療程效果都需有評估依據，不使用恐嚇、必然手術或療效保證促成消費。
 主觀覺得電療後較舒服，不能直接推定循環改善或特定病因；介入適應症由診斷與評估決定，不用「自費適應症」定義。禁忌症須對應具體介入，不能把腫瘤病史等一概列為所有治療或運動的禁忌。"""
@@ -127,6 +130,44 @@ def format_ntd(amount: int | float) -> str:
     return f"NT${amount:,.0f}"
 
 
+def build_clinic_reference() -> str:
+    lines = [
+        f"診所：{CLINIC_NAME}；官方據點標示：{CLINIC_INFO['branch_label']}。",
+        f"地址：{CLINIC_INFO['address']}。電話：{CLINIC_INFO['phone']}。",
+        f"官方據點頁：{CLINIC_INFO['official_url']}",
+        "官方公告服務時段：" + "／".join(CLINIC_INFO["hours"]) + "。",
+        CLINIC_INFO["hours_note"],
+        "交通參考：" + " ".join(CLINIC_INFO["transport"]),
+    ]
+    if CLINIC_INFO.get("booking_url"):
+        lines.append(f"官方預約諮詢連結：{CLINIC_INFO['booking_url']}；{CLINIC_INFO['booking_note']}")
+    if CLINIC_INFO.get("map_url"):
+        lines.append(f"官方地圖連結：{CLINIC_INFO['map_url']}")
+    lines.append(f"資料來源：{CLINIC_INFO['source_url']}；查核日期：{CLINIC_INFO['verified_on']}。")
+    return "\n".join(lines)
+
+
+def render_clinic_info() -> None:
+    with st.expander("📍 診所資訊與交通"):
+        st.markdown(f"**{CLINIC_NAME}｜{CLINIC_INFO['branch_label']}**")
+        st.write(f"地址：{CLINIC_INFO['address']}")
+        st.markdown(f"電話：[{CLINIC_INFO['phone']}](tel:{CLINIC_INFO['phone_e164']})")
+        st.markdown("**官方公告服務時段**")
+        for period in CLINIC_INFO["hours"]:
+            st.write(period)
+        st.caption(CLINIC_INFO["hours_note"])
+        st.markdown("**交通參考**")
+        for route in CLINIC_INFO["transport"]:
+            st.write(route)
+        st.link_button("官方據點資訊", CLINIC_INFO["official_url"])
+        if CLINIC_INFO.get("map_url"):
+            st.link_button("開啟地圖導航", CLINIC_INFO["map_url"])
+        if CLINIC_INFO.get("booking_url"):
+            st.link_button("官方預約諮詢", CLINIC_INFO["booking_url"])
+            st.caption(CLINIC_INFO["booking_note"])
+        st.caption(f"資料查核：{CLINIC_INFO['verified_on']}；服務及門診異動以院所公告為準。")
+
+
 def get_package_quote(package_id: str) -> dict:
     package = PACKAGES[package_id]
     single = SINGLE_SERVICES[package["single_service"]]
@@ -142,7 +183,7 @@ def get_package_quote(package_id: str) -> dict:
 
 
 def build_pricing_reference() -> str:
-    lines = [f"診所：{CLINIC_NAME}。本診所為自費治療，內容依個人狀況客製化安排。", "單次服務："]
+    lines = [f"診所：{CLINIC_NAME}。本頁所列為自費治療方案，內容依個人狀況客製化安排。", "單次服務："]
     for service in SINGLE_SERVICES.values():
         lines.append(
             f"- {service['name']}：{service['minutes']}分鐘，{format_ntd(service['price'])}；"
@@ -156,13 +197,13 @@ def build_pricing_reference() -> str:
             f"折算每堂{format_ntd(quote['per_session'])}。相同項目10次單次原價合計{format_ntd(quote['original_total'])}，"
             f"共省{format_ntd(quote['saving'])}（每堂省{format_ntd(quote['saving_per_session'])}）。"
         )
-    lines.append("未提供：包套效期、退費／轉讓、分期、付款與預約方式、首次費用折抵或併用規則；需向診所確認。")
+    lines.append("未提供：包套效期、退費／轉讓、分期、付款、詳細預約流程、首次費用折抵或併用規則；需向診所確認。")
     return "\n".join(lines)
 
 
 def render_pricing() -> None:
     with st.expander("💰 診所價目表（新台幣）"):
-        st.markdown(f"**{CLINIC_NAME}｜自費治療，內容依個人狀況客製化安排**")
+        st.markdown(f"**{CLINIC_NAME}｜本頁自費治療方案，內容依個人狀況客製化安排**")
         st.markdown("**單次治療**")
         st.table([
             {
@@ -229,6 +270,10 @@ def build_prompt(
 患者特質：{escape(patient_type)}
 </情境資料>
 
+<診所官方資訊>
+{build_clinic_reference()}
+</診所官方資訊>
+
 <診所已知價目>
 {build_pricing_reference()}
 </診所已知價目>
@@ -265,7 +310,7 @@ def build_prompt(
 依部位方案主軸與可信價目表，從自主管理到符合適應症的選項，用台灣口吻邀請共同決定。初診且體驗資格相符時，可明說：「首次評估與治療40分鐘是NT$999，我們先弄清楚狀況，再一起聊後續，好不好？」有警訊者應先就醫，不以體驗替代就醫。
 談整套規劃時，依適應症與需求選擇合適項目，完整區分單次原價、10堂總價、包套均價與同項目節省金額；不預設每個人都需要10堂，不承諾固定幾天見效。已知價目可直接說明，未提供的效期、退費、折抵及預約規則仍需確認。
 ### 見招拆招（2句）
-- **健保電療就好**：接住「有比較鬆」的感受，尊重其他院所的健保選項，再透明說明本診所為自費；不說本院有健保，不宣稱自費才能治本。
+- **健保電療就好**：接住「有比較鬆」的感受，尊重健保醫療選項，再透明說明本頁列示自費治療方案；診所其他服務的健保適用需另行確認，不宣稱自費才能治本。
 - **想再考慮／自費好貴**：尊重預算及暫緩決定，可依資格與評估選擇首次體驗或單次，也可釐清包套總支出與同項目節省金額；不讓包套均價看起來是可單堂購買價格。兩句都要可直接說出口，不做強硬回嘴，並自然回應患者原先選定的抗拒點。
 ### 評估與轉介提醒
 簡短列出該部位需確認的評估、適應症、禁忌症及警訊；未提供的院所資訊仍用條件句或待確認佔位，不另增第五個二級標題。
@@ -299,8 +344,9 @@ def main() -> None:
     st.set_page_config(page_title=f"{CLINIC_NAME}｜診間話術產生器", page_icon="🩺", layout="wide")
     st.title(f"🩺 {CLINIC_NAME}｜診間話術產生器")
     st.caption("由 Gemini 3.8 Flash 即時生成：從在地生活情境出發，先同理、說清楚，再一起決定下一步。")
-    st.caption("本診所為自費治療，療程內容依個人狀況客製化安排。")
+    st.caption("本頁所列為自費治療方案，療程內容依個人狀況客製化安排；其他醫療服務與健保適用請洽診所確認。")
     st.info("請勿輸入姓名、電話或其他可識別患者的資料。輸入內容將傳送至 Google Gemini；生成內容需由治療師依臨床評估確認。")
+    render_clinic_info()
     render_pricing()
 
     with st.sidebar:

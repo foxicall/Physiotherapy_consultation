@@ -1,0 +1,20 @@
+{
+  "name": "生生優動板橋診所",
+  "branch_label": "板橋分院（診所暨物理治療）",
+  "address": "新北市板橋區文化路一段142號",
+  "phone": "02-8252-1611",
+  "phone_e164": "+886282521611",
+  "official_url": "https://www.aicarept.com/location/location-ntpc",
+  "map_url": "https://maps.app.goo.gl/6QGtRKG7JsjX6NMu9",
+  "booking_url": "https://www.aicarept.com/info/reservation",
+  "booking_note": "請於官方表單選擇板橋分院；送出後需專人聯繫確認，不代表即時完成預約。",
+  "hours": ["上午 09:00–12:30", "下午 13:30–17:00", "晚間 18:00–21:30"],
+  "hours_note": "官方公告週六、週日晚上不營業。此為一般服務時段，實際治療、醫師門診及休診安排請先來電確認，異動以院所公告為準。",
+  "transport": [
+    "捷運新埔站2號出口步行約6分鐘。",
+    "板橋站5號出口步行約7分鐘。",
+    "公車中山國中（文化站）下車，步行約1–2分鐘。"
+  ],
+  "source_url": "https://www.aicarept.com/location/location-ntpc",
+  "verified_on": "2026-10-19"
+}

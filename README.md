@@ -2,6 +2,12 @@
 
 使用 Python、Streamlit 與 Google GenAI SDK，透過 `gemini-3.8-flash` 產生繁體中文顧問式溝通指南。
 
+## 互動介面預覽
+
+另提供 [獨立預覽頁原始檔](docs/index.html)，可切換四個部位及自訂情境、查看四段示範話術並複製 Markdown。此頁可直接以瀏覽器開啟，亦可透過 GitHub Pages 的 `main` 分支 `/docs` 來源發布。
+
+預覽頁以固定資料與版型組合，不連接 Gemini、不包含 API 金鑰，也不是目前 Streamlit 服務的公開轉送。即時 AI 生成功能仍由下方的 Streamlit 程式提供。
+
 ## 安裝與啟動
 
 在專案根目錄執行（建議 Python 3.10 以上）：

@@ -1,6 +1,6 @@
 # 物理治療業務話術產生器
 
-使用 Python、Streamlit 與 Google GenAI SDK，透過 `gemini-2.5-flash` 產生繁體中文顧問式溝通指南。
+使用 Python、Streamlit 與 Google GenAI SDK，透過 `gemini-3.8-flash` 產生繁體中文顧問式溝通指南。
 
 ## 安裝與啟動
 

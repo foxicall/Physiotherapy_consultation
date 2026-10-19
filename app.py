@@ -5,7 +5,7 @@ import streamlit as st
 from google import genai
 from google.genai import errors, types
 
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-3.8-flash"
 
 
 def build_prompt(symptom: str, stage: str, objection: str, patient_type: str) -> str:
@@ -101,7 +101,7 @@ def main() -> None:
                     elif code in {"408", "504"}:
                         st.error("API 請求逾時，請稍後重新生成。")
                     elif code == "404":
-                        st.error("找不到指定模型，請確認帳戶可使用 gemini-2.5-flash。")
+                        st.error(f"找不到指定模型，請確認帳戶可使用 {MODEL}。")
                     else:
                         st.error("Gemini API 暫時無法完成請求，請確認服務狀態與 API 設定後重試。")
                 except httpx.RequestError:

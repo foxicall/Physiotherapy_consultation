@@ -12,9 +12,11 @@
 
 雲端開發環境的金鑰不會自動移轉到 Render。請在正式平台的秘密設定中完成配置，不要將金鑰貼進 GitHub、前端設定或公開檔案。
 
-## GitHub Pages 安裝入口
+## 選用：GitHub Pages 安裝入口
 
-Pages 來源為 `main` 分支的 `/docs`。它提供 PWA 介面、50 套症候群、收藏及離線價目，但不能執行 Python。
+Render 網址已提供完整 PWA，不必另開 Pages。若需要獨立的靜態入口，由儲存庫管理員至 [Settings → Pages](https://github.com/foxicall/Physiotherapy_consultation/settings/pages)，選擇 **Deploy from a branch → main → /docs → Save**。GitHub 整合可能沒有 Pages 管理權限，必須由管理員完成此設定。
+
+等待 Pages 部署成功後，才可使用 `https://foxicall.github.io/Physiotherapy_consultation/`。此入口提供 PWA 介面、50 套症候群、收藏及離線價目，但不能執行 Python。
 
 正式 AI 服務部署後，可採以下任一方式：
 

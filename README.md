@@ -2,11 +2,13 @@
 
 可安裝於 iPhone、Android 與電腦的 PWA，整合 50 套物理治療症候群、台灣診間話術與診所自費價目。正式行動版採用 FastAPI + 原生 HTML/CSS/JavaScript；原有 Streamlit 介面保留，共用相同的 Gemini 提示詞與價格計算。
 
-- [手機版／知識庫](https://foxicall.github.io/Physiotherapy_consultation/)
 - [一鍵部署完整 AI 服務至 Render](https://render.com/deploy?repo=https://github.com/foxicall/Physiotherapy_consultation)
 - [部署與管理說明](DEPLOYMENT.md)
+- [正式版本與原始碼下載](https://github.com/foxicall/Physiotherapy_consultation/releases)
 
-GitHub Pages 版本提供可安裝、可離線使用的知識庫及價目表。**AI 生成需要另行部署 Python 服務並設定伺服器金鑰**；不會以固定示範文字冒充 AI 結果。完整服務部署後，同一網址同時提供 PWA 與 AI API，也可將服務網址填入 Pages 版的「診所服務連線設定」。
+**先完成 Render 部署並設定伺服器金鑰，即可取得可安裝的 HTTPS 網址**。同一網址提供 PWA、離線知識庫、價目表及 AI API；AI 結果來自實際模型回應。
+
+也可依部署說明自行啟用 GitHub Pages，提供獨立的離線知識庫入口。Pages 不能執行 Python，使用 AI 時需在「診所服務連線設定」填入 Render 網址。
 
 ## 手機安裝
 

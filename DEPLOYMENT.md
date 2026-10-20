@@ -12,6 +12,32 @@
 
 雲端開發環境的金鑰不會自動移轉到 Render。請在正式平台的秘密設定中完成配置，不要將金鑰貼進 GitHub、前端設定或公開檔案。
 
+## 既有 Python／Streamlit 服務切換成 PWA
+
+若首頁是 Streamlit，且 `/api/health` 或 `/manifest.webmanifest` 也回傳相同 HTML，表示服務仍使用 Streamlit 啟動指令。在 Render 該服務的 Settings 設定：
+
+- Branch：`main`；Root Directory：留空。
+- Build Command：`pip install -r requirements-api.txt`
+- Start Command：`uvicorn server:api --host 0.0.0.0 --port $PORT --workers 1 --no-access-log`
+- Health Check Path：`/api/health`
+
+確認 Environment 內已有 `GEMINI_API_KEY` 及 `CLINIC_ACCESS_CODE`，再執行 Manual Deploy → Deploy latest commit。設定變更與實際部署是兩個步驟。
+
+### 官方外掛 OAuth 無法連接時
+
+不必等待 OAuth 修復；可使用 [Render REST API](https://render.com/docs/api)。在 Render Account Settings → API Keys 建立存取金鑰，透過工作環境的秘密變數 `RENDER_API_KEY` 提供，允許其用於 `api.render.com`；也可在本機互動終端由工具隱藏讀入。不要將金鑰貼進對話、命令列參數或 Git。
+
+```bash
+# 使用專案已安裝 httpx 的 Python 環境；預設只檢查，不寫入
+python scripts/configure_render.py
+# 檢查結果後，部署已驗證的完整 commit
+python scripts/configure_render.py --apply --commit <完整40位commit雜湊>
+```
+
+此工具只處理網址為 `https://physiotherapy-consultation.onrender.com`、來源為本 GitHub 專案的既有 Python Web Service；它更新上述四項設定並觸發指定 commit 的部署。其他服務、方案及環境變數均保留。API Key 不會寫入檔案，也不會在輸出中顯示。
+
+部署請求成功不代表服務已上線。須等 Render 顯示 Live，再確認 `/api/health` 回傳 JSON、症候群數量為 50、`generation_enabled` 為 true；接著檢查 PWA 安裝及實際 AI 生成。
+
 ## 選用：GitHub Pages 安裝入口
 
 Render 網址已提供完整 PWA，不必另開 Pages。若需要獨立的靜態入口，由儲存庫管理員至 [Settings → Pages](https://github.com/foxicall/Physiotherapy_consultation/settings/pages)，選擇 **Deploy from a branch → main → /docs → Save**。GitHub 整合可能沒有 Pages 管理權限，必須由管理員完成此設定。

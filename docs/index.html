@@ -1,181 +1,56 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="生生優動板橋診所溝通工作台：診所資訊、自費價目表、部位與客群情境，以及台灣診間四段話術的互動示範。">
-  <title>生生優動板橋診所｜有溫度的治療溝通</title>
-  <style>
-    :root{--ink:#183b34;--muted:#6b7b74;--line:#dfe7e1;--paper:#f6f8f5;--green:#276450;--light:#eaf2ec;--gold:#9c6b20}
-    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;font-size:14px;line-height:1.7}
-    button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #b9dcca;outline-offset:3px}
-    .topbar{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;border-bottom:1px solid var(--line);gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}.brand-icon{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:var(--ink);color:#fff;font-size:23px}.brand strong{font-size:16px;letter-spacing:.03em}.brand small{display:block;font-size:10px;letter-spacing:.13em;color:var(--muted)}
-    .badge{display:inline-flex;align-items:center;gap:7px;border-radius:99px;background:#fff6e3;color:var(--gold);font-size:12px;padding:6px 12px;white-space:nowrap}.dot{width:6px;height:6px;background:currentColor;border-radius:50%}
-    .layout{display:grid;grid-template-columns:326px minmax(0,1fr);min-height:calc(100vh - 78px)}
-    aside{background:#eef3ed;border-right:1px solid var(--line);padding:28px 24px 32px}.eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#698274;font-weight:700}.aside-title{font-size:20px;margin:5px 0 4px}.aside-lead{color:var(--muted);font-size:12px;margin:0 0 23px}
-    .field{margin:0 0 17px}.field label{display:block;font-size:12px;font-weight:650;margin-bottom:6px}.field small{display:block;color:var(--muted);font-size:11px;margin-top:5px}select,input{width:100%;min-height:43px;border:1px solid #cfdbd1;border-radius:9px;background:#fff;padding:10px 11px;color:var(--ink)}select{padding-right:27px;font-size:12px}input{font-size:12px}input::placeholder{color:#8b9991}
-    .divider{height:1px;background:#d7e1d7;margin:21px 0}.primary{width:100%;border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:600;padding:13px 15px;display:flex;justify-content:space-between;align-items:center}.primary:hover{background:#1c5140}.privacy{font-size:11px;color:var(--muted);margin:13px 1px 0;line-height:1.8}.privacy strong{font-weight:600;color:#62776a}
-    main{padding:35px 44px 38px;max-width:1230px;width:100%;margin:0 auto}.hero{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-bottom:26px}.hero h1{font-size:clamp(25px,2.5vw,37px);line-height:1.45;font-weight:650;letter-spacing:-.035em;margin:8px 0 9px}.hero p{color:var(--muted);font-size:13px;margin:0;max-width:560px}.hero-symbol{width:108px;height:108px;flex-shrink:0;border-radius:50%;border:1px solid #d9e5da;display:grid;place-items:center;position:relative}.hero-symbol:after{content:"";position:absolute;inset:12px;border:1px solid #d9e5da;border-radius:50%}.hero-symbol span{font-size:39px;font-weight:300;color:#40765b}
-    .notice{display:flex;gap:10px;align-items:flex-start;padding:12px 15px;border-radius:10px;background:#edf3ee;border:1px solid #dce7dd;color:#536c5d;font-size:12px;margin-bottom:24px}.notice strong{font-weight:600}.notice p{margin:0}.notice-icon{font-size:14px}
-    .context-card{border:1px solid var(--line);background:#fff;border-radius:14px;padding:19px 22px;margin-bottom:19px;display:flex;gap:16px;align-items:center}.context-icon{width:43px;height:43px;border:1px solid #dce9df;background:#f3f8f3;border-radius:12px;display:grid;place-items:center;font-size:20px;flex-shrink:0}.context-body{min-width:0;flex:1}.context-body h2{font-size:15px;margin:0 0 3px;font-weight:650}.context-body p{font-size:11px;color:var(--muted);margin:0;overflow-wrap:anywhere}.context-meta{text-align:right;white-space:nowrap;font-size:11px;color:var(--muted)}.context-meta strong{color:var(--green);font-size:17px;font-weight:500;display:block;line-height:1.3}
-    .document{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px #173d3203}.document-toolbar{min-height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);gap:15px}.tabs{display:flex;align-self:stretch;gap:22px}.tab{border:0;border-bottom:2px solid transparent;background:none;color:#8a958e;font-size:12px;padding:0 1px}.tab[aria-selected="true"]{border-bottom-color:var(--green);color:var(--green);font-weight:650}.copy-button{padding:6px 10px;border:1px solid var(--line);background:#fff;border-radius:7px;color:#62766a;font-size:11px}.copy-button:hover{background:#f4f7f3}.copy-button:disabled{opacity:.4;cursor:default}
-    .document-content{padding:10px 28px 30px}.prose{font-size:13px;line-height:1.95;color:#44594e;overflow-wrap:anywhere}.prose h2{font-size:17px;line-height:1.6;color:var(--ink);font-weight:650;margin:27px 0 13px;padding-top:24px;border-top:1px solid #eaf0e9}.prose h2:first-child{border-top:0;padding-top:0}.prose h3{font-size:13px;font-weight:650;color:var(--green);margin:19px 0 8px}.prose p{margin:9px 0}.prose ul{padding-left:20px}.prose li{margin:5px 0}.prose strong{font-weight:650;color:#2e5142}pre{font:12px/1.9 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#52665a;margin:20px 0 0;tab-size:2}.empty{padding:55px 20px;text-align:center;color:var(--muted)}.empty-icon{display:grid;place-items:center;margin:0 auto 19px;width:62px;height:62px;border-radius:18px;background:#edf4ed;color:#648873;font-size:24px}.empty h2{font-size:18px;color:#486453;margin:0 0 7px}.empty p{font-size:12px;margin:0 auto;max-width:380px}.steps{display:flex;justify-content:center;gap:22px;font-size:11px;margin-top:25px;color:#809084}.steps span{display:flex;gap:7px;align-items:center}.steps b{background:#eff4ee;border-radius:50%;width:19px;height:19px;font-size:10px;display:grid;place-items:center;font-weight:500}.hidden,[hidden]{display:none!important}.footer{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin:17px 1px 0;font-size:10px;color:#8b978d}.footer a{color:#718577;text-decoration:none}.footer a:hover{text-decoration:underline}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:10px;box-shadow:0 6px 22px #0002;padding:10px 18px;font-size:12px;z-index:20}.changed{color:#96722b!important}
-    .clinic-card{border:1px solid #d5e3d8;background:linear-gradient(120deg,#fff 30%,#eef5ef);border-radius:14px;padding:22px;margin-bottom:15px}.clinic-heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.clinic-heading h2{font-size:19px;line-height:1.5;margin:4px 0}.clinic-heading p{font-size:12px;color:var(--muted);margin:0}.clinic-label{white-space:nowrap;font-size:10px;background:#e4efe6;padding:5px 9px;border-radius:6px;color:var(--green)}.clinic-contact{display:grid;grid-template-columns:1.3fr 1fr;gap:14px 24px;margin-top:19px;padding-top:17px;border-top:1px solid #dfe9df}.contact-label{font-size:10px;color:var(--muted);display:block;margin-bottom:3px;letter-spacing:.05em}.contact-value{font-size:12px;color:#355a47;line-height:1.85}.contact-value a{color:var(--green);text-decoration:none}.contact-note{display:block;font-size:10px;line-height:1.8;color:var(--muted);margin-top:5px}.clinic-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.clinic-links a{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:11px;font-weight:600;border:1px solid #cfdfd1;background:#fff;padding:7px 12px;border-radius:8px;text-decoration:none}.clinic-links a:hover{background:#e9f2e9}.clinic-links a:first-child{background:var(--green);color:#fff;border-color:var(--green)}.clinic-source{font-size:10px;color:#7a8c7e;margin:14px 0 0;line-height:1.7}.clinic-source a{color:inherit;text-underline-offset:2px}.pricing-panel{border:1px solid var(--line);background:#fff;border-radius:12px;margin-bottom:24px;overflow:hidden}.pricing-panel summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 21px;gap:12px}.pricing-panel summary::-webkit-details-marker{display:none}.pricing-panel summary:focus-visible{outline:3px solid #b9dcca;outline-offset:-4px}.pricing-panel summary strong{display:block;font-size:13px}.pricing-panel summary small{display:block;font-size:10px;font-weight:400;color:var(--muted)}.price-peek{white-space:nowrap;font-size:12px;color:var(--green)}.price-peek span{margin-left:10px;font-size:17px;display:inline-block}.pricing-panel[open] .price-peek span{transform:rotate(45deg)}.pricing-body{padding:0 20px 18px;border-top:1px solid #edf1eb}.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-top:16px}.price-item{padding:14px;border:1px solid #e3ebe1;border-radius:9px;background:#fafcf9}.price-item.package{background:#f0f6ef}.price-item h3{font-size:12px;margin:0;color:#315341}.price-item .duration{font-size:10px;color:var(--muted);margin:2px 0 8px}.price-item .amount{font-size:21px;font-weight:550;line-height:1.3;color:var(--green);letter-spacing:-.03em}.price-item .price-desc{font-size:10px;color:#71816f;margin:10px 0 0;line-height:1.8}.price-item .saving{font-size:10px;color:#58754f;margin:6px 0 0}.pricing-note{font-size:10px;color:#7b8878;margin:13px 0 0;line-height:1.85}
-    @media(max-width:1100px){.pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.clinic-contact{grid-template-columns:1fr}.clinic-heading h2{font-size:17px}}
-    @media(max-width:720px){.clinic-card{padding:18px}.clinic-heading{gap:8px}.clinic-label{font-size:9px;padding:4px 7px}.clinic-contact{grid-template-columns:1fr 1fr;gap:14px}.clinic-heading h2{font-size:17px}.pricing-panel summary{padding:14px 17px}.pricing-body{padding:0 14px 16px}.price-peek{font-size:11px}.price-item{padding:12px}.price-item .amount{font-size:20px}}
-    @media(max-width:380px){.clinic-contact,.pricing-grid{grid-template-columns:1fr}.clinic-heading{display:block}.clinic-label{display:inline-block;margin-top:10px}}
-    @media(min-width:1400px){main{padding-top:42px}.hero{margin-bottom:30px}.layout{grid-template-columns:346px minmax(0,1fr)}aside{padding-left:32px;padding-right:30px}}
-    @media(max-width:1000px){main{padding:26px}.hero-symbol{display:none}.layout{grid-template-columns:290px minmax(0,1fr)}aside{padding:24px 20px}.topbar{padding:0 24px}.context-meta{display:none}}
-    @media(max-width:720px){.topbar{height:72px;padding:0 18px}.brand strong{font-size:13px}.brand small{font-size:8px}.brand-icon{width:33px;height:33px;border-radius:10px;font-size:20px}.badge{font-size:10px;padding:5px 9px}.layout{display:flex;flex-direction:column}aside{border-right:0;border-bottom:1px solid var(--line);padding:23px 22px}.aside-lead{margin-bottom:17px}form{display:grid;grid-template-columns:1fr 1fr;column-gap:15px}.wide,.divider,.primary,.privacy{grid-column:1/-1}.field{margin-bottom:13px}.divider{margin:5px 0 18px}.field label{font-size:11px}main{padding:24px 17px 28px}.hero{margin-bottom:20px}.hero h1{font-size:27px}.hero p{font-size:12px}.document-content{padding:9px 19px 23px}.document-toolbar{padding:0 17px}.tabs{gap:17px}.context-card{padding:15px}.context-body h2{font-size:14px}.footer{font-size:9px}.prose h2{font-size:16px}.steps{gap:13px}.empty{padding:37px 0}}
-    @media(prefers-reduced-motion:no-preference){button{transition:background .15s,color .15s}.document{animation:appear .35s ease-out}@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#183e36"><meta name="description" content="生生優動板橋診所的行動溝通工作台。搜尋50套症候群、準備台灣診間話術、查閱價目，安裝到手機主畫面。">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="診間溝通">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/apple-touch-icon.png"><link rel="stylesheet" href="./styles.css">
+<title>診間溝通｜生生優動板橋診所</title>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand"><div class="brand-icon" aria-hidden="true">✚</div><div><strong>生生優動板橋診所</strong><small>BANQIAO · CONVERSATION STUDIO</small></div></div>
-    <span class="badge"><span class="dot"></span>互動示範預覽</span>
-  </header>
-  <div class="layout">
-    <aside aria-labelledby="settings-title">
-      <div class="eyebrow">Your consultation</div>
-      <h2 class="aside-title" id="settings-title">從患者情境開始</h2>
-      <p class="aside-lead">部位 × 客群 × 顧慮，用熟悉的台灣口吻聊清楚。</p>
-      <form id="scenario-form">
-        <div class="field wide"><label for="body-part">疼痛與評估部位</label><select id="body-part" required></select></div>
-        <div class="field wide" id="custom-body-field" hidden><label for="custom-body">自訂疼痛與評估部位</label><input id="custom-body" maxlength="100" placeholder="例如：手肘與前臂"></div>
-        <div class="field"><label for="symptom">患者主訴 / 症狀</label><select id="symptom" required></select></div>
-        <div class="field"><label for="custom-symptom">自訂症狀</label><input id="custom-symptom" maxlength="500" placeholder="填寫後優先使用"><small id="symptom-hint">選填，填寫後優先使用</small></div>
-        <div class="divider"></div>
-        <div class="field wide"><label for="stage">溝通階段 / 目標</label><select id="stage"><option>初診評估後討論整套自費療程規劃</option><option>單次治療後討論適合的徒手／震波選項</option><option>療程結束後討論自主管理與追蹤</option></select></div>
-        <div class="field"><label for="objection">患者猶豫 / 抗拒點</label><select id="objection"><option>去中醫喬一下就好啦</option><option>健保電一電好像有比較鬆</option><option>自費好貴先不要</option><option>等真的痛到走不動再說</option></select></div>
-        <div class="field"><label for="patient">目標客群標籤</label><select id="patient"><option>每天盯螢幕10小時的工程師</option><option>市場扛重物的阿伯/阿姐</option><option>迷上路跑的馬拉松咖</option><option>抱小孩抱到手痛的新手媽媽</option></select></div>
-        <button class="primary" type="submit"><span>產生示範話術</span><span aria-hidden="true">↗</span></button>
-        <p class="privacy"><strong>示範模式，不呼叫 Gemini。</strong><br>請勿輸入姓名、電話等可識別患者的資料。</p>
-      </form>
-    </aside>
-    <main>
-      <section class="hero" aria-labelledby="page-title">
-        <div><div class="eyebrow">生生優動板橋診所 · 自費治療</div><h1 id="page-title">先聽你說，<br>再一起找回舒服的日常。</h1><p>把專業說得聽得懂，把選擇留給每個人。從肩頸、腰背到膝蓋，練習一段親切、有依據的台灣診間對話。</p></div>
-        <div class="hero-symbol" aria-hidden="true"><span>✦</span></div>
-      </section>
-      <div class="notice"><span class="notice-icon" aria-hidden="true">ⓘ</span><p><strong>目前為互動示範，並非即時 AI 生成。</strong> 這裡以固定版型依選項組合話術；即時 Gemini 功能由 Streamlit 服務提供。本頁為自費治療方案，內容依個人狀況安排。</p></div>
-      <section class="clinic-card" aria-labelledby="clinic-title">
-        <div class="clinic-heading"><div><div class="eyebrow">Visit us · 診所資訊</div><h2 id="clinic-title">生生優動板橋診所</h2><p id="clinic-branch">板橋分院（診所暨物理治療）</p></div><span class="clinic-label">自費方案 · 個別評估</span></div>
-        <div id="clinic-contact" class="clinic-contact"></div>
-        <div id="clinic-links" class="clinic-links"></div>
-        <p id="booking-note" class="clinic-source"></p>
-        <p id="clinic-source" class="clinic-source"></p>
-      </section>
-      <details class="pricing-panel" id="pricing-panel">
-        <summary><span><strong>診所價目表</strong><small>從首次評估，到符合需求的自費選項</small></span><span class="price-peek">首次 NT$999 <span aria-hidden="true">＋</span></span></summary>
-        <div class="pricing-body"><div id="pricing-grid" class="pricing-grid"></div><p class="pricing-note">以上金額為新台幣。首次 NT$999 為 40 分鐘初診／首次體驗價，資格依診所確認；包套折算均價不是單堂售價。10 堂為方案規格，實際需求依評估與個人意願決定。包套效期、退費、轉讓、付款與首次費用折抵等規則，請向診所確認。</p></div>
-      </details>
-      <section class="context-card" aria-labelledby="context-title"><div class="context-icon" aria-hidden="true">◎</div><div class="context-body"><h2 id="context-title">頸椎與肩頸區</h2><p id="context-detail">選擇左側情境，開始預覽。</p></div><div class="context-meta"><strong>04</strong>章節 · 02 句見招拆招</div></section>
-      <section class="document" aria-label="話術指南">
-        <div class="document-toolbar"><div class="tabs" role="tablist" aria-label="預覽方式"><button class="tab" id="preview-tab" type="button" role="tab" aria-controls="preview-pane" aria-selected="true">話術預覽</button><button class="tab" id="text-tab" type="button" role="tab" aria-controls="text-pane" aria-selected="false" tabindex="-1">完整文字</button></div><button id="copy-button" class="copy-button" type="button" disabled>複製話術 ⧉</button></div>
-        <div class="document-content"><div id="preview-pane" role="tabpanel" aria-labelledby="preview-tab"><div class="empty"><div class="empty-icon" aria-hidden="true">✧</div><h2>你的下一段好對話，從這裡開始</h2><p>調整左側情境，點選「產生示範話術」，查看依部位整理的四段溝通指南。</p><div class="steps"><span><b>1</b>選擇部位</span><span><b>2</b>設定情境</span><span><b>3</b>預覽與複製</span></div></div></div><div id="text-pane" role="tabpanel" aria-labelledby="text-tab" hidden><pre id="raw-text">產生示範話術後，這裡會顯示可複製的完整 Markdown。</pre></div></div>
-      </section>
-      <footer class="footer"><span>生生優動板橋診所 · 示範話術由治療師確認後使用</span><a href="https://github.com/foxicall/Physiotherapy_consultation" target="_blank" rel="noopener noreferrer">查看原始專案 ↗</a></footer>
-    </main>
-  </div>
-  <div id="toast" class="toast" role="status" hidden></div>
-  <script id="preview-data" type="application/json">{"頸椎與肩頸區 (頭痛/神經壓迫/上交叉症候群)": {"title": "頸椎與肩頸區", "anatomy": "肩頸緊繃可能和持續的工作負荷、頸部耐力或肩胛動作控制有關，仍需要透過評估釐清。若同時有手臂麻感，也需要辨別是否涉及神經問題。", "impact": "症狀可能讓轉頭、久坐工作或睡眠比較不舒服，但不代表一定會惡化或形成神經壓迫。可以依日常功能的變化，討論適合的調整與追蹤。", "plan": "可從工作負荷調整與適量活動開始，再依評估安排頸部及肩胛穩定運動。若符合適應症，也能討論關節鬆動或軟組織處理，並觀察實際反應；徒手處理無法保證神經減壓。", "goal": "轉頭看路更自在，坐著工作時比較容易維持舒適，也保留自己調整與休息的能力。", "symptoms": ["肩頸僵硬與活動受限", "頸部疼痛合併手臂麻感", "頸部活動相關頭痛", "自訂症狀"], "placeholder": "例如：久坐後肩頸緊繃，轉頭時不舒服"}, "腰椎與骨盆核心 (椎間盤突出/反覆閃腰/下交叉症候群)": {"title": "腰椎與骨盆核心", "anatomy": "下背不適可能涉及腰骨盆的負荷分配、臀部與軀幹的動作控制，也可能受到活動量和生活情境影響。單靠疼痛位置，還不能判定椎間盤或骨盆結構有問題。", "impact": "反覆疼痛可能影響久坐、起身或搬物的信心，並不表示一定會椎間盤破裂、需要手術。功能是否改善，適合依症狀與活動反應持續觀察。", "plan": "可依評估討論活動調整、漸進的核心與臀肌訓練，以及符合需要的徒手處理。紅繩或皮拉提斯可依能力與偏好選擇，重點在於實際功能反應，而非保證骨盆對位或不再復發。", "goal": "坐站轉換、走路與搬取日常物品更有把握，逐步找回能自行管理活動負荷的節奏。", "symptoms": ["慢性下背痛", "反覆閃腰", "腰痛合併腿部放射不適", "自訂症狀"], "placeholder": "例如：久坐後腰痛，搬重物時反覆不適"}, "膝關節與下肢動力鏈 (髕骨外翻/退化關節炎/韌帶微創傷)": {"title": "膝關節與下肢動力鏈", "anatomy": "膝部疼痛可能和活動負荷、髖膝動作控制或肌力有關，需要一起了解走路、上下樓梯等動作。足弓或髕骨的位置，都不能單獨說明疼痛原因。", "impact": "疼痛可能讓上下樓梯、步行或運動變得吃力，但影像上的退化不代表一定會持續惡化，也不能據此推論需要換人工關節。", "plan": "可先討論負荷調整，再依能力安排下肢肌力與動作控制訓練。震波只在特定、經評估符合適應症的慢性肌腱問題中考慮，並非所有膝痛的選項，也不保證軟骨再生或韌帶修復。", "goal": "上下樓梯與走路更有信心，並依自己的反應，逐步恢復喜歡的運動或外出活動。", "symptoms": ["髕骨股骨疼痛症候群", "上下樓梯膝痛", "膝關節退化相關不適", "自訂症狀"], "placeholder": "例如：下樓梯或跑步後膝蓋前側疼痛"}, "肩關節與旋轉肌 (五十肩/夾擠症候群/活動度受限)": {"title": "肩關節與旋轉肌", "anatomy": "抬手疼痛可能與旋轉肌負荷、肩胛動作或關節活動度有關。是否涉及五十肩、肌腱或其他因素，仍需要依病史與評估釐清。", "impact": "症狀可能影響穿衣、取物或睡眠，但抬手痛不代表一定會演變成五十肩或失去自理能力。可以從最困擾的生活動作開始觀察變化。", "plan": "可依疼痛敏感度與評估結果，安排漸進的活動度、旋轉肌與肩胛控制訓練，必要時討論適合的徒手處理。震波僅在特定適應症下考慮，例如經確認的鈣化性肌腱病，不適用於所有肩痛。", "goal": "穿衣、梳洗與伸手取物比較順暢，逐步恢復肩部活動，也保留能負擔的練習節奏。", "symptoms": ["五十肩", "抬手疼痛與活動受限", "肩部夜間疼痛", "自訂症狀"], "placeholder": "例如：手舉高或穿衣時肩膀疼痛"}, "自訂其他部位": {"title": "自訂其他部位", "anatomy": "不同部位的不適可能涉及負荷、肌力、動作控制或其他因素。先了解症狀出現的情境與最受影響的活動，才能建立適合這個部位的評估方向。", "impact": "症狀對生活的影響因人而異，不能只靠部位名稱就推論惡化、神經壓迫或手術風險。可以以實際功能與症狀的變化，討論是否需要進一步評估。", "plan": "可在評估後討論自主管理、適量活動與漸進訓練。徒手、震波或器材介入，都需要符合個別適應症與限制，再依反應調整。", "goal": "先選一個最想改善的日常活動，逐步找回舒適度與自主性，讓處理方式符合自己的生活和預算。", "symptoms": ["自訂症狀"], "placeholder": "例如：握物時手肘外側疼痛"}}</script>
-  <script id="pricing-data" type="application/json">{"services": {"first_visit": {"name": "首次評估與治療", "minutes": 40, "price": 999, "description": "初診整體力學動作評估與初步治療緩解", "note": "初診／首次體驗專屬價，適用資格依診所確認"}, "manual": {"name": "專案徒手", "minutes": 60, "price": 2200, "description": "一對一深層徒手治療、關節鬆動、筋膜減壓", "note": "單次原價；實際處置依評估安排"}, "instruments": {"name": "儀器整合", "minutes": 60, "price": 3200, "description": "整合震波、INDIBA 英特波等儀器選項，實際組合依個人狀況安排", "note": "單次原價；適應症及禁忌症須先評估"}}, "packages": {"manual": {"name": "專案徒手療程組", "single_service": "manual", "sessions": 10, "total": 20900}, "instruments": {"name": "整合儀器療程組", "single_service": "instruments", "sessions": 10, "total": 30400}}}</script>
-  <script id="clinic-data" type="application/json">{"name": "生生優動板橋診所", "branch_label": "板橋分院（診所暨物理治療）", "address": "新北市板橋區文化路一段142號", "phone": "02-8252-1611", "phone_e164": "+886282521611", "official_url": "https://www.aicarept.com/location/location-ntpc", "map_url": "https://maps.app.goo.gl/6QGtRKG7JsjX6NMu9", "booking_url": "https://www.aicarept.com/info/reservation", "booking_note": "請於官方表單選擇板橋分院；送出後需專人聯繫確認，不代表即時完成預約。", "hours": ["上午 09:00–12:30", "下午 13:30–17:00", "晚間 18:00–21:30"], "hours_note": "官方公告週六、週日晚上不營業。此為一般服務時段，實際治療、醫師門診及休診安排請先來電確認，異動以院所公告為準。", "transport": ["捷運新埔站2號出口步行約6分鐘。", "板橋站5號出口步行約7分鐘。", "公車中山國中（文化站）下車，步行約1–2分鐘。"], "source_url": "https://www.aicarept.com/location/location-ntpc", "verified_on": "2026-10-19"}</script>
-  <script>
-    'use strict';
-    const profiles=JSON.parse(document.getElementById('preview-data').textContent);
-    const pricing=JSON.parse(document.getElementById('pricing-data').textContent);
-    const clinic=JSON.parse(document.getElementById('clinic-data').textContent);
-    const CUSTOM='自訂其他部位';
-    const $=id=>document.getElementById(id);
-    let currentMarkdown='';let toastTimer;
-    function escapeHTML(value){return String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
-    function markdownToHTML(markdown){let html='',inList=false;for(const line of markdown.split('\n')){if(!line.startsWith('- ')&&inList){html+='</ul>';inList=false;}const safe=escapeHTML(line).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');if(line.startsWith('## '))html+='<h2>'+safe.slice(3)+'</h2>';else if(line.startsWith('### '))html+='<h3>'+safe.slice(4)+'</h3>';else if(line.startsWith('- ')){if(!inList){html+='<ul>';inList=true;}html+='<li>'+safe.slice(2)+'</li>';}else if(line.trim())html+='<p>'+safe+'</p>';}return html+(inList?'</ul>':'');}
-    function neutralValue(value){return String(value).replace(/[\r\n]+/g,' ').replace(/[<>]/g,'').trim();}
-    const ntd=amount=>'NT$'+Number(amount).toLocaleString('en-US',{maximumFractionDigits:0});
-    function safeLink(value){return typeof value==='string'&&/^https:\/\/[^\s]+$/.test(value)?escapeHTML(value):'';}
-    function renderClinic(){
-      $('clinic-title').textContent=clinic.name;
-      $('clinic-branch').textContent=clinic.branch_label;
-      const phoneNumber=String(clinic.phone_e164).replace(/[^0-9+]/g,'');
-      const hours=clinic.hours.map(escapeHTML).join('<br>');
-      const transport=clinic.transport.map(escapeHTML).join('<br>');
-      $('clinic-contact').innerHTML='<div><span class="contact-label">診所地址</span><div class="contact-value">'+escapeHTML(clinic.address)+'</div></div><div><span class="contact-label">聯絡電話</span><div class="contact-value"><a href="tel:'+phoneNumber+'">'+escapeHTML(clinic.phone)+'</a></div></div><div><span class="contact-label">一般服務時段</span><div class="contact-value">'+hours+'<small class="contact-note">'+escapeHTML(clinic.hours_note)+'</small></div></div><div><span class="contact-label">交通方式</span><div class="contact-value">'+transport+'</div></div>';
-      const official=safeLink(clinic.official_url),map=safeLink(clinic.map_url),booking=safeLink(clinic.booking_url),source=safeLink(clinic.source_url);
-      $('clinic-links').innerHTML=(booking?'<a href="'+booking+'" target="_blank" rel="noopener noreferrer">官方預約諮詢 ↗</a>':'')+(map?'<a href="'+map+'" target="_blank" rel="noopener noreferrer">開啟地圖 ↗</a>':'')+(official?'<a href="'+official+'" target="_blank" rel="noopener noreferrer">官方院所資訊 ↗</a>':'');
-      $('booking-note').textContent=clinic.booking_note;
-      $('clinic-source').innerHTML='資料來源：<a href="'+source+'" target="_blank" rel="noopener noreferrer">診所官方資訊</a> · 查核日期 '+escapeHTML(clinic.verified_on)+'。本頁所列為自費治療方案，其他服務與健保適用情形請洽院所確認。';
-    }
-    function renderPricing(){const services=Object.values(pricing.services).map(service=>'<div class="price-item"><h3>'+escapeHTML(service.name)+'</h3><div class="duration">'+service.minutes+' 分鐘 · 單次</div><div class="amount">'+ntd(service.price)+'</div><p class="price-desc">'+escapeHTML(service.description)+'<br>'+escapeHTML(service.note)+'</p></div>');const packages=Object.values(pricing.packages).map(pack=>{const single=pricing.services[pack.single_service],saving=single.price*pack.sessions-pack.total;return '<div class="price-item package"><h3>'+escapeHTML(pack.name)+'</h3><div class="duration">'+single.minutes+' 分鐘 × '+pack.sessions+' 堂</div><div class="amount">'+ntd(pack.total)+'</div><p class="saving">包套折算 '+ntd(pack.total/pack.sessions)+'／堂<br>較同項目 '+pack.sessions+' 次單次原價共省 '+ntd(saving)+'</p></div>';});$('pricing-grid').innerHTML=services.join('')+packages.join('');}
-    const patientOpeners={
-      '每天盯螢幕10小時的工程師':'如果一天真的得盯著螢幕這麼久，身體一直撐著，真的會凍未條耶。先不急著談療程，我想聽聽哪個時候最不舒服。',
-      '市場扛重物的阿伯/阿姐':'搬搬扛扛的工作很辛苦，有時候也不是一句「多休息」就辦得到。我們先看看怎麼配合您的工作步調，好不好？',
-      '迷上路跑的馬拉松咖':'很想跑，又怕一跑更不舒服，這種拉扯真的很煩。我們先把能做的、需要調整的弄清楚，不用一開始就把喜歡的運動全停掉。',
-      '抱小孩抱到手痛的新手媽媽':'照顧孩子很多時候很難說休息就休息，自己的不舒服常常只好先放旁邊。我們先聊聊哪些動作最吃力，再找您做得到的方法。'
-    };
-    function buildDemo(context,profile){const {body,symptom,stage,objection,patient}=context;const first=pricing.services.first_visit,manual=pricing.services.manual,instruments=pricing.services.instruments,manualPack=pricing.packages.manual,instrumentPack=pricing.packages.instruments;const opening=patientOpeners[patient]||'這個不舒服辛苦您了，我們先聽聽它怎麼影響生活。';const metaphor=body.includes('腰')?'如果評估發現有負荷分配的問題，可以想像辦公室有同事請假，工作暫時都堆到另一個人身上，難怪會累。若確實涉及椎間盤，也能把它想成有內餡的車輪餅來理解受力；但活組織和食物不同，不是說一彎腰就會爆漿，也不是能用手直接推回去。':'如果評估發現有動作代償，可以想像辦公室有同事請假，工作暫時都堆到另一個人身上，難怪會累。我們想了解的就是：哪些地方現在扛太多，能不能重新分工。這只是幫助理解的比喻，實際原因還是要評估。';const objectionReply=objection==='去中醫喬一下就好啦'?'可以，中醫也是您可以討論的選項。重點是先了解原因、處置內容和適不適合自己，不用為了選哪一邊有壓力。':objection==='健保電一電好像有比較鬆'?'有比較鬆，這個感受很值得參考。我們可以尊重您選擇健保治療的考量，也一起看看工作、走路或抬手的功能有沒有進步。':objection==='等真的痛到走不動再說'?'先觀察也是一種選擇。我們不會說放著就一定變嚴重；只是如果日常活動一直受影響，可以提早評估，知道怎麼調整，不用硬撐到很難受。':'預算當然要顧，真的不用今天就決定一整套。我們可以先把費用和內容講清楚，再挑您現在願意、也負擔得來的方式。';const next=stage.startsWith('療程結束')?'如果您想做的日常活動已恢復，也能討論自主管理或結束療程；有需要再評估，不預設一定要續約。':stage.startsWith('單次治療')?'先看看這次處理之後的症狀與功能反應，再討論單次或其他合適選項；不是每個部位都適合震波，也不用為了加購而加購。':`如果符合初診／首次體驗資格，首次評估與治療 ${first.minutes} 分鐘是 ${ntd(first.price)}。我們先弄清楚狀況，再一起聊後續，好不好？`;return `## 1. 🍵 搏感情與同理破冰 (Rapport)
-### 先接住人，再聊症狀
-「${opening}」
-「您對『${objection}』的考量，我有聽到。${objectionReply}」
-追問：「這個不舒服，目前最影響您哪一件事？您希望我們先幫忙釐清什麼？」
-### 這次練習的情境
-- 疼痛與評估部位：${body}
-- 患者主訴：${symptom}
-- 目標客群：${patient}
-- 溝通階段：${stage}
-- 目前顧慮：${objection}
-
-## 2. 💡 接地氣的生物力學衛教 (Education with Metaphor)
-### 用生活裡的比喻，慢慢說明白
-「${metaphor}」
-待評估的部位假設：${profile.anatomy}
-「不痛是好事耶，我們也看看想做的動作是不是回來了；如果功能也恢復，就可以討論自己照顧、慢慢結束治療，不是一定要繼續花錢。」
-可討論的功能方向：${profile.goal}這些是候選目標，仍要先和本人確認。
-追問：「如果只先挑一個動作，您最想做得比較輕鬆的是哪一個？」
-
-## 3. ⚠️ 恐怖代價直白講 (Cost of Inaction)
-### 把生活影響講清楚，不用嚇人
-「${profile.impact}我們不會只看疼痛分數，也想知道您有沒有因此少做自己喜歡的事。」
-「如果這個不舒服一直影響您的日常，我們可以一起找調整的方法；不是說沒有買療程，就一定會變嚴重或需要開刀。」
-追問：「假如狀況暫時維持這樣，您最不想繼續受影響的生活活動是什麼？」
-
-## 4. 🤝 親切無壓力締結 (Taiwanese Closing)
-### 先找您做得到的一小步
-可依評估討論的部位方案：${profile.plan}
-「${next}」
-「單次專案徒手是 ${manual.minutes} 分鐘 ${ntd(manual.price)}；儀器整合是 ${instruments.minutes} 分鐘 ${ntd(instruments.price)}，是否使用震波、INDIBA 等選項要先評估，不代表每次都會全部做。您也可以先了解適合的自主管理方式。」
-「若後續真的適合、也有意願考慮 ${manualPack.sessions} 堂方案：專案徒手總價 ${ntd(manualPack.total)}，包套折算每堂 ${ntd(manualPack.total/manualPack.sessions)}，較同項目 ${manualPack.sessions} 次單次原價共省 ${ntd(manual.price*manualPack.sessions-manualPack.total)}；儀器整合總價 ${ntd(instrumentPack.total)}，包套折算每堂 ${ntd(instrumentPack.total/instrumentPack.sessions)}，共省 ${ntd(instruments.price*instrumentPack.sessions-instrumentPack.total)}。均價只適用完整包套，10 堂是方案規格，不是每個人都需要的次數。」
-追問：「把時間、預算和想改善的事一起考慮，您覺得哪個起步方式比較安心？」
-### 見招拆招（2句）
-- **健保電療就好**：「有比較舒服很好耶，您可以和實際提供健保服務的院所討論；這裡列的是生生優動板橋診所的自費治療方案，我們會把內容與費用講清楚，再一起看是否符合您的需求，不用因為付費方式就分誰一定比較好。」
-- **想再考慮／自費好貴**：「當然可以，先不用急著決定。若符合初診／首次體驗資格，可先了解 ${first.minutes} 分鐘 ${ntd(first.price)} 的評估與治療；後續要選單次、再觀察或討論整套規劃，都照您的步調走。」
-### 評估與轉介提醒
-部位名稱與選單中的疾病只是練習情境，不是已確診的結果。治療適應症、禁忌症與實際安排須由專業人員評估；若有進行性無力、急性重大外傷、發燒等警訊，應先安排適當醫療評估。包套效期、退費、折抵及預約時段，請向診所確認。
-
-示範預覽：此內容由固定版型與所選情境組合，不是即時 Gemini 生成。`;}
-    function showToast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,2500);}
-    function setTab(which){const preview=which==='preview';$('preview-tab').setAttribute('aria-selected',String(preview));$('text-tab').setAttribute('aria-selected',String(!preview));$('preview-tab').tabIndex=preview?0:-1;$('text-tab').tabIndex=preview?-1:0;$('preview-pane').hidden=!preview;$('text-pane').hidden=preview;}
-    function markChanged(){if(currentMarkdown){$('context-detail').classList.add('changed');$('context-detail').textContent='選項已調整；按「產生示範話術」更新。下方仍顯示上次的示範情境。';}}
-    function updateSymptomRequired(){const custom=$('symptom').value==='自訂症狀';$('custom-symptom').required=custom;$('symptom-hint').textContent=custom?'此情境需填寫具體症狀':'選填，填寫後優先使用';}
-    function changeBody(){const label=$('body-part').value;const profile=profiles[label];const custom=label===CUSTOM;$('custom-body-field').hidden=!custom;$('custom-body').required=custom;$('custom-body').value='';$('custom-symptom').value='';$('symptom').replaceChildren(...profile.symptoms.map(value=>new Option(value,value)));$('custom-symptom').placeholder=profile.placeholder||'例如：握物時手肘外側疼痛';updateSymptomRequired();if(!currentMarkdown){$('context-title').textContent=profile.title;$('context-detail').textContent='選擇情境，產生這個部位的示範指南。';}markChanged();}
-    $('body-part').replaceChildren(...Object.keys(profiles).map(label=>new Option(label,label)));
-    $('body-part').addEventListener('change',changeBody);
-    $('symptom').addEventListener('change',updateSymptomRequired);
-    $('scenario-form').addEventListener('input',markChanged);
-    $('scenario-form').addEventListener('change',markChanged);
-    $('scenario-form').addEventListener('submit',event=>{event.preventDefault();if(!$('scenario-form').reportValidity())return;const label=$('body-part').value;const profile=profiles[label];const body=neutralValue(label===CUSTOM?$('custom-body').value:profile.title);const symptom=neutralValue($('custom-symptom').value)||($('symptom').value==='自訂症狀'?'':$('symptom').value);if(!body||!symptom){showToast('請填寫部位與症狀，內容不可只有空白。');return;}const context={body,symptom,stage:$('stage').value,objection:$('objection').value,patient:$('patient').value};currentMarkdown=buildDemo(context,profile);$('preview-pane').innerHTML='<article class="prose">'+markdownToHTML(currentMarkdown)+'</article>';$('raw-text').textContent=currentMarkdown;$('context-title').textContent=body;$('context-detail').classList.remove('changed');$('context-detail').textContent='本次示範：'+symptom+' ｜ '+context.objection+' ｜ '+context.patient;$('copy-button').disabled=false;setTab('preview');showToast('示範話術已更新');});
-    $('preview-tab').addEventListener('click',()=>setTab('preview'));
-    $('text-tab').addEventListener('click',()=>setTab('text'));
-    for(const tab of [$('preview-tab'),$('text-tab')])tab.addEventListener('keydown',event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();const preview=event.key==='Home'||(event.key!=='End'&&tab.id==='text-tab');setTab(preview?'preview':'text');$(preview?'preview-tab':'text-tab').focus();}});
-    $('copy-button').addEventListener('click',async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(currentMarkdown);}else{const field=document.createElement('textarea');field.value=currentMarkdown;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();const copied=document.execCommand('copy');field.remove();if(!copied)throw new Error('copy unavailable');}showToast('完整話術已複製');}catch{setTab('text');showToast('請在「完整文字」中選取並複製。');}});
-    renderClinic();
-    renderPricing();
-    changeBody();
-    const initialProfile=profiles[$('body-part').value];
-    currentMarkdown=buildDemo({body:initialProfile.title,symptom:$('symptom').value,stage:$('stage').value,objection:$('objection').value,patient:$('patient').value},initialProfile);
-    $('preview-pane').innerHTML='<article class="prose">'+markdownToHTML(currentMarkdown)+'</article>';$('raw-text').textContent=currentMarkdown;$('context-detail').textContent='初始示範：'+$('symptom').value+' ｜ 可調整左側情境並重新產生';$('copy-button').disabled=false;
-  </script>
+<a class="skip-link" href="#main">跳到主要內容</a>
+<header class="topbar">
+<a class="brand" href="#library"><img src="./icons/icon-192.png" width="42" height="42" alt=""><span><strong>診間溝通</strong><small>生生優動 · 板橋診所</small></span></a>
+<nav class="desktop-nav" aria-label="主要導覽"><a href="#library" data-nav="library">症候群知識庫</a><a href="#workspace" data-nav="workspace">話術工作台</a><a href="#clinic" data-nav="clinic">診所與價目</a></nav>
+<button class="install-button" id="install-button" type="button">＋ 安裝到手機</button>
+</header>
+<div class="status-bar"><span id="connection-status" role="status">正在載入工作台</span><button id="update-button" class="text-button" hidden>有新版本，點此更新 ↻</button><span class="status-note">專業團隊的日常溝通夥伴</span></div>
+<main id="main" tabindex="-1">
+<section id="panel-library" class="panel" aria-labelledby="library-heading">
+<div class="hero"><div><span class="eyebrow">THE CONVERSATION STARTS HERE</span><h1 id="library-heading">把專業，<br class="mobile-only">說進生活裡。</h1><p>從一個貼切的比喻開始，<br class="mobile-only">讓每次診間對話，都多一點理解。</p></div><div class="hero-aside"><span class="hero-number">50<small>套</small></span><span>常見症候群<br>五大部位 · 隨手查閱</span><div class="orbit" aria-hidden="true">＋</div></div></div>
+<div class="library-toolbar"><label class="search-box" for="search"><span aria-hidden="true">⌕</span><input id="search" aria-label="搜尋症候群" type="search" placeholder="搜尋症候群、俗稱或症狀，例如：媽媽手" maxlength="100" autocomplete="off"><kbd>⌘ K</kbd></label><button id="favorites-filter" class="secondary" aria-pressed="false">☆ 已收藏</button></div>
+<div class="category-filters" id="categories" aria-label="部位分類"></div>
+<div class="section-heading"><h2>找到這次對話的起點</h2><span id="result-count" role="status">正在讀取資料…</span></div>
+<div id="catalog-error" class="notice error" hidden><p>知識庫暫時無法載入，請確認網路後再試。</p><button id="retry-catalog" class="secondary">重新載入</button></div>
+<div id="syndrome-grid" class="syndrome-grid" aria-label="症候群搜尋結果"></div>
+<div id="no-results" class="empty-state" hidden><span aria-hidden="true">⌕</span><h3>暫時沒有符合的條目</h3><p>試試較短的關鍵字，或改為全部部位。</p><button id="clear-search" class="secondary">重設篩選</button></div>
+<p class="library-footnote">知識庫是臨床溝通參考，疾病名稱不等於確診。原始機轉與療效描述仍須由治療師查核。</p>
+</section>
+<section id="panel-workspace" class="panel" aria-labelledby="workspace-heading" hidden>
+<div class="page-heading"><span class="eyebrow">A LITTLE PREPARATION, A BETTER CONVERSATION</span><h1 id="workspace-heading">先整理，再好好說。</h1><p>帶入這次的情境，準備一段有同理心、說得清楚的對話。</p></div>
+<div class="workspace-layout"><form id="guide-form" class="form-card">
+<div class="card-heading"><span class="step-number">01</span><h2>準備溝通情境</h2></div>
+<label for="syndrome-select">本次症候群</label><select id="syndrome-select" required><option value="">請先選擇症候群</option></select><p class="field-help">選擇代表待評估情境，不會被當成患者已確診。</p>
+<label for="symptom">實際主訴 <span class="optional">選填</span></label><textarea id="symptom" rows="3" maxlength="500" placeholder="例如：早上下床第一步腳跟痛，走一會兒比較緩和。請勿填寫個資。"></textarea><span class="character-count" id="symptom-count">0 / 500</span>
+<label for="patient-type">對話對象</label><select id="patient-type" required></select><label for="objection">對方的考量</label><select id="objection" required></select><label for="stage">這次的溝通目標</label><select id="stage" required></select>
+<div class="service-message" id="service-message" role="status">正在確認 AI 服務連線…</div>
+<div id="login-section" hidden><label for="access-code">診所使用碼</label><div class="input-action"><input id="access-code" type="password" maxlength="256" autocomplete="current-password" placeholder="請向診所管理員取得"><button id="login-button" class="secondary" type="button">解鎖</button></div></div>
+<button class="primary generate-button" id="generate-button" type="submit" disabled><span>生成話術指南</span><span aria-hidden="true">↗</span></button><p class="privacy-note">主訴與情境將傳送至 Google Gemini。請勿提供姓名、電話等個資；話術需由治療師審閱。</p>
+<details class="connection-settings"><summary>診所服務連線設定</summary><p>若管理員提供專屬服務網址，可在這裡連接。設定只儲存在這台裝置，不包含 AI 金鑰。</p><label for="service-url">診所服務網址</label><input id="service-url" type="url" placeholder="https://診所服務網址" autocomplete="url"><button class="secondary" id="save-service" type="button">儲存並重新連線</button><button class="text-button" id="logout-button" type="button" hidden>登出診所服務</button></details>
+</form>
+<article class="result-card" aria-labelledby="result-heading"><div class="result-toolbar"><div><span class="eyebrow">YOUR CONVERSATION NOTES</span><h2 id="result-heading">這次，可以這樣聊。</h2></div><div class="result-actions"><button id="copy-button" class="icon-button" disabled>複製</button><button id="share-button" class="icon-button" disabled>匯出</button></div></div><p id="guide-context" class="guide-context" hidden></p><div id="generation-error" class="notice error" role="alert" hidden></div><div id="result-empty" class="result-empty"><div class="note-illustration" aria-hidden="true"><span>「</span><i></i><i></i><i></i></div><h3>好的對話，從理解開始。</h3><p>選好症候群與對話情境，<br>這裡會整理出適合本次溝通的四段話術。</p><div class="four-steps"><span>01 同理破冰</span><span>02 白話衛教</span><span>03 生活影響</span><span>04 共同決策</span></div></div><div id="result-content" class="prose" hidden></div><p class="result-footnote">生成結果僅留在本次頁面；重新整理後清除。需要留存時，請自行複製或匯出。</p></article></div>
+</section>
+<section id="panel-clinic" class="panel" aria-labelledby="clinic-heading" hidden>
+<div class="page-heading"><span class="eyebrow">CLEAR INFORMATION, CONFIDENT CHOICES</span><h1 id="clinic-heading">資訊說清楚，選擇更安心。</h1><p>院所資訊與自費方案，讓對話有依據。</p></div><div id="clinic-info" class="clinic-card"></div><div class="section-heading"><h2>單次服務</h2><span>新台幣 · 實際安排依評估</span></div><div id="service-prices" class="price-grid"></div><div class="section-heading"><h2>10 堂療程方案</h2><span>包套均價並非單堂售價</span></div><div id="package-prices" class="package-grid"></div><p class="pricing-note">10 堂是方案規格，不代表每位患者都需要 10 次治療。首次體驗為 40 分鐘，不與 60 分鐘服務直接比較價差。效期、退費、轉讓、付款及折抵規則請向診所確認；本頁自費價目不代表其他服務的健保適用情形。</p>
+<div class="install-card"><div><span class="eyebrow">ALWAYS WITH YOU</span><h2>把工作台，放進口袋。</h2><p>加入手機主畫面，下次點一下就能開啟。首次載入完成後，知識庫與價目也能離線查閱。</p></div><button id="install-secondary" class="primary">查看安裝方式 ↗</button></div>
+</section>
+<footer class="footer"><span>生生優動板橋診所 · 診間溝通工作台</span><span>v1.0.0 · 為每次更好的對話</span></footer>
+</main>
+<nav class="mobile-nav" aria-label="手機主要導覽"><a href="#library" data-nav="library"><span aria-hidden="true">▦</span>知識庫</a><a href="#workspace" data-nav="workspace"><span aria-hidden="true">✎</span>話術工作台</a><a href="#clinic" data-nav="clinic"><span aria-hidden="true">＋</span>診所與價目</a></nav>
+<dialog id="syndrome-dialog" class="detail-dialog"><div class="dialog-header"><span class="eyebrow" id="detail-category"></span><button class="close-button" data-close="syndrome-dialog" aria-label="關閉症候群內容">×</button></div><h2 id="detail-title"></h2><p class="source-note">使用者提供的知識庫原文 · 以下為待查核參考，不是患者診斷或療效承諾。</p><div id="detail-fields"></div><div class="dialog-footer"><button id="detail-favorite" class="secondary">☆ 收藏</button><button id="use-syndrome" class="primary">帶入話術工作台 ↗</button></div></dialog>
+<dialog id="install-dialog" class="install-dialog"><div class="dialog-header"><img src="./icons/icon-192.png" alt="" width="56" height="56"><button class="close-button" data-close="install-dialog" aria-label="關閉安裝說明">×</button></div><h2>讓工作台，隨手可得。</h2><p>使用手機瀏覽器開啟本頁，加入主畫面後即可像 App 一樣開啟。</p><div class="install-instructions"><h3>iPhone / iPad</h3><ol><li>以 <strong>Safari</strong> 開啟本頁。</li><li>點選「分享」，再選擇<strong>加入主畫面</strong>。</li><li>確認名稱，點選「新增」。</li></ol><h3>Android</h3><ol><li>以 <strong>Chrome</strong> 開啟本頁。</li><li>點選「安裝到手機」，或右上角選單的<strong>安裝應用程式／加入主畫面</strong>。</li><li>依畫面提示完成安裝。</li></ol></div><p class="field-help">通訊軟體內建瀏覽器可能不支援安裝，請改用 Safari 或 Chrome。AI 生成需保持連線。</p><button id="native-install" class="primary" hidden>立即安裝</button></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript><p class="notice error">本工作台需要啟用 JavaScript 才能搜尋與生成話術。</p></noscript>
+<script type="module" src="./app.mjs"></script>
 </body>
 </html>

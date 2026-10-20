@@ -1,2 +1,10 @@
 __pycache__/
 *.py[cod]
+.env
+.env.*
+!.env.example
+.venv/
+node_modules/
+artifacts/
+test-results/
+playwright-report/

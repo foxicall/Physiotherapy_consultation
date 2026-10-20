@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: banqiao-clinic-app
+    runtime: docker
+    plan: free
+    autoDeployTrigger: checksPass
+    healthCheckPath: /api/health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CLINIC_ACCESS_CODE
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: https://foxicall.github.io

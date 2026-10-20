@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "生生優動板橋｜診間溝通工作台",
+  "short_name": "診間溝通",
+  "description": "50套症候群知識庫、台灣診間話術與診所價目，隨手可得。",
+  "lang": "zh-Hant-TW",
+  "start_url": "./?source=pwa#library",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f8f4",
+  "theme_color": "#183e36",
+  "categories": ["medical", "productivity"],
+  "icons": [
+    {"src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "./icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "症候群知識庫", "url": "./#library", "icons": [{"src": "./icons/icon-192.png", "sizes": "192x192"}]},
+    {"name": "話術工作台", "url": "./#workspace", "icons": [{"src": "./icons/icon-192.png", "sizes": "192x192"}]}
+  ]
+}
